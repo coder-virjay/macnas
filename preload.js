@@ -4,7 +4,8 @@ contextBridge.exposeInMainWorld('versions', {
   node: () => process.versions.node,
   chrome: () => process.versions.chrome,
   electron: () => process.versions.electron,
-  exec: (str) => {
-    ipcRenderer.invoke('exec', str)
+  exec: async (str) => {
+    const r = await ipcRenderer.invoke('exec', str)
+    console.log(r)
   }
 })
