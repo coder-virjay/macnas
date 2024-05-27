@@ -12,8 +12,11 @@ const createWindow = () => {
       preload: path.join(__dirname, 'preload.js')
     }
   })
-
-  win.loadFile(process.env.URL)
+  if (process.env.npm_lifecycle_event === 'start') {
+    win.loadURL(process.env.URL)
+  } else {
+    win.loadFile(process.env.URL)
+  }
 }
 
 app.whenReady().then(() => {
